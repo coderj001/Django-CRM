@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
+pillow = "*"
 
 [dev-packages]
 django-linter = "*"
@@ -14,6 +15,9 @@ ipython = "*"
 isort = "*"
 rope = "*"
 autopep8 = "*"
+django-debug-toolbar = "*"
+django-extensions = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.8"
