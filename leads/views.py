@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from leads.forms import LeadForm
+from django.shortcuts import redirect, render
 
+from leads.forms import LeadForm
 from leads.models import Lead
 
 
@@ -25,5 +25,39 @@ def lead_detail(request, pk):
 
 
 def lead_create(request):
-    context = {"form": LeadForm()}
+    form = None
+    if request.method == 'GET':
+        form = LeadForm()
+    else:
+        form = LeadForm(request.POST or None)
+        if form.is_valid():
+            instant = form.save()
+            return redirect('leads:lead-detail', instant.id)
+    context = {"form": form}
     return render(request, "leads/lead_create.html", context=context)
+
+
+def lead_update(request, pk):
+    lead = Lead.objects.get(id=pk)
+    form = None
+    if request.method == 'POST':
+        form = LeadForm(request.POST or None)
+        if form.is_valid():
+            instant = form.save()
+            return redirect('leads:lead-detail', instant.id)
+
+    form = LeadForm(instance=lead)
+    context = {
+        "lead": lead,
+        "form": form,
+    }
+    return render(request, "leads/lead_update.html", context=context)
+
+
+def lead_delete(request, pk):
+    lead = Lead.objects.get(id=pk)
+    if request.method == 'POST':
+        lead.delete()
+        return redirect('leads:lead-list')
+    context = {"lead": lead}
+    return render(request, "leads/lead_delete.html", context=context)
