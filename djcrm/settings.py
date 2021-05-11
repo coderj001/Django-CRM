@@ -17,13 +17,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'django_extensions',
-    'debug_toolbar',
-
-
+    # apps
     'leads.apps.LeadsConfig'
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'django_extensions',
+        'debug_toolbar',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -42,7 +44,7 @@ ROOT_URLCONF = 'djcrm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -40,7 +40,7 @@ class Lead(models.Model):
         verbose_name_plural = "Leads"
 
     def __str__(self):
-        return super(Lead, self).__str__()
+        return f"{self.first_name} - {self.last_name}"
 
 
 class Agent(models.Model):
@@ -56,4 +56,4 @@ class Agent(models.Model):
         verbose_name_plural = "Agents"
 
     def __str__(self):
-        return super(Agent, self).__str__()
+        return f"{self.user.username}"

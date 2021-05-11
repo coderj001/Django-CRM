@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Create a New Form</h1>
+  <div>
+    <form action="." method="post" accept-charset="utf-8">
+      {% csrf_token %}
+      {{ form.as_p }}
+      </form>
+        <br>
+        <br>
+        <br>
+        <a href=" {% url 'leads:lead-list' %}">Go Back</a>
+    </div>
+  {% endblock content %}

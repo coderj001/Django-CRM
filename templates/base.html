@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      DJCRM |
+      {% block TITLE %}{% endblock TITLE %}
+    </title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body>
+      <div class="max-w-7xl mx-auto ">
+          {% include "utils/navbar.html" %}
+          {% block content %}{% endblock content %}
+      </div>
+  </body>
+</html>

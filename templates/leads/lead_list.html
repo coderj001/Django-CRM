@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block TITLE %} Dashbord {% endblock TITLE %}
+
+{% block content %}
+  <h1> Leader List</h1>
+  <div>
+      <ol>
+          {% for lead in leads %}
+          <li> {{ lead.first_name }} - {{ lead.last_name }}: <a href=" {% url 'leads:lead-detail' lead.id %}">link</a> </li>
+          {% endfor %}
+      </ol>
+      <br>
+      <br>
+      <a href=" {% url 'leads:lead-create' %}">Create Lead</a>
+  </div>
+{% endblock content %}
