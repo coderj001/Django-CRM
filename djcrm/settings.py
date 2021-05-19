@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # apps
-    'leads.apps.LeadsConfig'
+    'leads.apps.LeadsConfig',
+    'agents.apps.AgentsConfig'
 ]
 
 if DEBUG:

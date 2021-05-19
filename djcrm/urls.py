@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('leads/', include('leads.urls')),
+    path('agents/', include('agents.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
