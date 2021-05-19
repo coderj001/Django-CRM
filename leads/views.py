@@ -1,8 +1,16 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView
+)
 
 from leads.forms import LeadForm
 from leads.models import Lead
-from django.views.generic import TemplateView, ListView
 
 
 class LandingPageView(TemplateView):
@@ -10,60 +18,32 @@ class LandingPageView(TemplateView):
 
 
 class LeadListView(ListView):
-    template_name = "leads.lead_list.html"
+    template_name = "leads/lead_list.html"
+    queryset = Lead.objects.all()
+    context_object_name = "leads"
+
+
+class LeadDetailView(DetailView):
+    model = Lead
+    template_name = "leads/lead_detail.html"
+    context_object_name = "lead"
+
+
+class LeadCreateView(CreateView):
+    template_name = "leads/lead_create.html"
+    form_class = LeadForm
+    success_url = reverse_lazy("leads:lead-list")
+
+
+class LeadUpdateView(UpdateView):
+    template_name = "leads/lead_update.html"
+    queryset = Lead.objects.all()
+    form_class = LeadForm
+    success_url = reverse_lazy("leads:lead-list")
+
+
+class LeadDeleteView(DeleteView):
+    template_name = "leads/lead_delete.html"
     queryset = Lead.objects.all()
 
-
-def lead_list(request):
-    leads = Lead.objects.all()
-    context = {
-        "leads": leads
-    }
-    return render(request, "leads/lead_list.html", context=context)
-
-
-def lead_detail(request, pk):
-    lead = Lead.objects.get(id=pk)
-    context = {
-        "lead": lead
-    }
-    return render(request, "leads/lead_detail.html", context=context)
-
-
-def lead_create(request):
-    form = None
-    if request.method == 'GET':
-        form = LeadForm()
-    else:
-        form = LeadForm(request.POST or None)
-        if form.is_valid():
-            instant = form.save()
-            return redirect('leads:lead-detail', instant.id)
-    context = {"form": form}
-    return render(request, "leads/lead_create.html", context=context)
-
-
-def lead_update(request, pk):
-    lead = Lead.objects.get(id=pk)
-    form = None
-    if request.method == 'POST':
-        form = LeadForm(request.POST or None)
-        if form.is_valid():
-            instant = form.save()
-            return redirect('leads:lead-detail', instant.id)
-
-    form = LeadForm(instance=lead)
-    context = {
-        "lead": lead,
-        "form": form,
-    }
-    return render(request, "leads/lead_update.html", context=context)
-
-
-def lead_delete(request, pk):
-    lead = Lead.objects.get(id=pk)
-    if request.method == 'POST':
-        lead.delete()
-        return redirect('leads:lead-list')
-    context = {"lead": lead}
-    return render(request, "leads/lead_delete.html", context=context)
+    success_url = reverse_lazy("leads:lead-list")
