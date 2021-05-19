@@ -2,6 +2,8 @@ import os
 from distutils.util import strtobool
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('secret_key')
@@ -122,3 +124,6 @@ INTERNAL_IPS = [
 ]
 
 AUTH_USER_MODEL = 'leads.User'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+LOGIN_REDIRECT_URL = reverse_lazy('leads:lead-list')
+LOGOUT_REDIRECT_URL = reverse_lazy('landing-page')
