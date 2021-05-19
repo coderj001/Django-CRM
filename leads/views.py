@@ -12,6 +12,7 @@ from django.views.generic import (
 
 from leads.forms import LeadForm, CustomUserCreationForm
 from leads.models import Lead
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class SignUpView(CreateView):
@@ -24,22 +25,25 @@ class LandingPageView(TemplateView):
     template_name = "utils/landing.html"
 
 
-class LeadListView(ListView):
+class LeadListView(LoginRequiredMixin, ListView):
     template_name = "leads/lead_list.html"
     queryset = Lead.objects.all()
     context_object_name = "leads"
+    login_url = reverse_lazy('login')
 
 
-class LeadDetailView(DetailView):
+class LeadDetailView(LoginRequiredMixin, DetailView):
     model = Lead
     template_name = "leads/lead_detail.html"
     context_object_name = "lead"
+    login_url = reverse_lazy('login')
 
 
-class LeadCreateView(CreateView):
+class LeadCreateView(LoginRequiredMixin, CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadForm
     success_url = reverse_lazy("leads:lead-list")
+    login_url = reverse_lazy('login')
 
     def form_valid(self, form):
         send_mail(
@@ -51,15 +55,16 @@ class LeadCreateView(CreateView):
         return super(LeadCreateView, self).form_valid(form)
 
 
-class LeadUpdateView(UpdateView):
+class LeadUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "leads/lead_update.html"
     queryset = Lead.objects.all()
     form_class = LeadForm
     success_url = reverse_lazy("leads:lead-list")
+    login_url = reverse_lazy('login')
 
 
-class LeadDeleteView(DeleteView):
+class LeadDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "leads/lead_delete.html"
     queryset = Lead.objects.all()
-
     success_url = reverse_lazy("leads:lead-list")
+    login_url = reverse_lazy('login')

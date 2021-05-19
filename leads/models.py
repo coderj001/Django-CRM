@@ -7,6 +7,17 @@ class User(AbstractUser):
     pass
 
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "UserProfile"
+        verbose_name_plural = "UserProfiles"
+
+    def __str__(self) -> str:
+        return self.user.username
+
+
 class Lead(models.Model):
     SOURCE_CHOICES = (
         ('Youtube', 'Youtube'),
@@ -54,6 +65,7 @@ class Agent(models.Model):
         null=True,
         blank=True
     )
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Agent"
