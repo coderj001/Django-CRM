@@ -9,9 +9,9 @@ from django.views.generic import (
     UpdateView
 )
 
-from leads.forms import LeadForm, CustomUserCreationForm
+from agents.mixins import LoginRequiredMixin, OrganisorLoginRequiredMixin
+from leads.forms import CustomUserCreationForm, LeadForm
 from leads.models import Lead
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class SignUpView(CreateView):
@@ -26,19 +26,37 @@ class LandingPageView(TemplateView):
 
 class LeadListView(LoginRequiredMixin, ListView):
     template_name = "leads/lead_list.html"
-    queryset = Lead.objects.all()
     context_object_name = "leads"
     login_url = reverse_lazy('login')
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(
+                organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset
+
 
 class LeadDetailView(LoginRequiredMixin, DetailView):
-    model = Lead
     template_name = "leads/lead_detail.html"
     context_object_name = "lead"
     login_url = reverse_lazy('login')
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(
+                organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset
 
-class LeadCreateView(LoginRequiredMixin, CreateView):
+
+class LeadCreateView(OrganisorLoginRequiredMixin, CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadForm
     success_url = reverse_lazy("leads:lead-list")
@@ -56,14 +74,32 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "leads/lead_update.html"
-    queryset = Lead.objects.all()
     form_class = LeadForm
     success_url = reverse_lazy("leads:lead-list")
     login_url = reverse_lazy('login')
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(
+                organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset
+
 
 class LeadDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "leads/lead_delete.html"
-    queryset = Lead.objects.all()
     success_url = reverse_lazy("leads:lead-list")
     login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(
+                organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset

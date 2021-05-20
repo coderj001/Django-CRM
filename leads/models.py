@@ -46,7 +46,13 @@ class Lead(models.Model):
     # profile_pic = models.ImageField(blank=True, null=True)
     # special_files = models.FileField(blank=True, null=True)
 
-    agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    agent = models.ForeignKey(
+        "Agent",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         verbose_name = "Lead"

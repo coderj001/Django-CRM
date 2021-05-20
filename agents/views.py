@@ -1,12 +1,18 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView
+)
 
 from agents.forms import AgentModelForm
+from agents.mixins import OrganisorLoginRequiredMixin
 from leads.models import Agent
 
 
-class AgentListView(LoginRequiredMixin, ListView):
+class AgentListView(OrganisorLoginRequiredMixin, ListView):
     template_name = "agents/agent_list.html"
     context_object_name = "agents"
 
@@ -17,7 +23,7 @@ class AgentListView(LoginRequiredMixin, ListView):
         return Agent.objects.filter(organisation=organisation)
 
 
-class AgentCreateView(LoginRequiredMixin, CreateView):
+class AgentCreateView(OrganisorLoginRequiredMixin, CreateView):
     template_name = "agents/agent_create.html"
     form_class = AgentModelForm
     success_url = reverse_lazy("agents:agent-list")
@@ -31,7 +37,7 @@ class AgentCreateView(LoginRequiredMixin, CreateView):
         return super(AgentCreateView, self).form_valid(form)
 
 
-class AgentDetailView(LoginRequiredMixin, DetailView):
+class AgentDetailView(OrganisorLoginRequiredMixin, DetailView):
     model = Agent
     template_name = "agents/agent_detail.html"
     context_object_name = "agent"
@@ -43,7 +49,7 @@ class AgentDetailView(LoginRequiredMixin, DetailView):
         return Agent.objects.filter(organisation=organisation)
 
 
-class AgentUpdateView(LoginRequiredMixin, UpdateView):
+class AgentUpdateView(OrganisorLoginRequiredMixin, UpdateView):
     template_name = "agents/agent_update.html"
     form_class = AgentModelForm
     success_url = reverse_lazy("agents:agent-list")
@@ -55,7 +61,7 @@ class AgentUpdateView(LoginRequiredMixin, UpdateView):
         return Agent.objects.filter(organisation=organisation)
 
 
-class AgentDeleteView(LoginRequiredMixin, DeleteView):
+class AgentDeleteView(OrganisorLoginRequiredMixin, DeleteView):
     template_name = "agents/agent_delete.html"
     success_url = reverse_lazy("agents:agent-list")
 
