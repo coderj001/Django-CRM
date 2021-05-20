@@ -8,18 +8,21 @@ from leads.models import Agent
 
 class AgentListView(LoginRequiredMixin, ListView):
     template_name = "agents/agent_list.html"
-
-    login_url = reverse_lazy('login')
     context_object_name = "agents"
 
+    login_url = reverse_lazy('login')
+
     def get_queryset(self):
-        return Agent.objects.all()
+        organisation = self.request.user.userprofile
+        return Agent.objects.filter(organisation=organisation)
 
 
 class AgentCreateView(LoginRequiredMixin, CreateView):
     template_name = "agents/agent_create.html"
     form_class = AgentModelForm
     success_url = reverse_lazy("agents:agent-list")
+
+    login_url = reverse_lazy('login')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -32,17 +35,32 @@ class AgentDetailView(LoginRequiredMixin, DetailView):
     model = Agent
     template_name = "agents/agent_detail.html"
     context_object_name = "agent"
+
     login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        organisation = self.request.user.userprofile
+        return Agent.objects.filter(organisation=organisation)
 
 
 class AgentUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "agents/agent_update.html"
     form_class = AgentModelForm
     success_url = reverse_lazy("agents:agent-list")
-    queryset = Agent.objects.all()
+
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        organisation = self.request.user.userprofile
+        return Agent.objects.filter(organisation=organisation)
 
 
 class AgentDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "agents/agent_delete.html"
     success_url = reverse_lazy("agents:agent-list")
-    queryset = Agent.objects.all()
+
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        organisation = self.request.user.userprofile
+        return Agent.objects.filter(organisation=organisation)
