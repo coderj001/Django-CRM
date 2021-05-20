@@ -73,3 +73,6 @@ class Agent(models.Model):
 
     def __str__(self):
         return f"{self.user.username}"
+
+    def get_absolute_url(self):
+        return reverse("agents:agent-detail", kwargs={'pk': self.id})
