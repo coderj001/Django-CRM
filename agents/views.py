@@ -1,3 +1,6 @@
+from random import randint
+
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -32,8 +35,18 @@ class AgentCreateView(OrganisorLoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         instance = form.save(commit=False)
-        instance.organisation = self.request.user.userprofile
+        instance.is_agent = True
+        instance.is_organisor = False
+        instance.set_password(f"password{randint(100,100000)}")
         instance.save()
+        Agent.objects.create(
+            user=instance, organisation=self.request.user.userprofile)
+        send_mail(
+            subject="You are invited to be an agent.",
+            message="You are added as agent in DJCRM, please login to continue.",
+            from_email="test@test.com",
+            recipient_list=[instance.email]
+        )
         return super(AgentCreateView, self).form_valid(form)
 
 
