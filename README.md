@@ -47,11 +47,11 @@
 - [x] Invite Agents<!-- 5:58:59 -->
 - [x] Password Reset<!-- 6:07:15 -->
 - [x] Unassigned Leads<!-- 6:25:37 -->
-- [ ] Assign Agents<!-- 6:31:53 -->
-- [ ] Category Model<!-- 6:48:15 -->
-- [ ] Category List View<!-- 6:52:16 -->
-- [ ] Category Detail View<!-- 7:02:47 -->
-- [ ] Category Update View<!-- 7:13:45 -->
+- [x] Assign Agents<!-- 6:31:53 -->
+- [x] Category Model<!-- 6:48:15 -->
+- [x] Category List View<!-- 6:52:16 -->
+- [x] Category Detail View<!-- 7:02:47 -->
+- [x] Category Update View<!-- 7:13:45 -->
 - [ ] Crispy Forms<!-- 7:21:26 -->
 - [ ] Styling<!-- 7:43:35 -->
 - [ ] Environment Variables<!-- 7:53:03 -->

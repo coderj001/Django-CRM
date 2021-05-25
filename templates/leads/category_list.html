@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block TITLE %}
+  Category
+{% endblock TITLE %}
+
+{% block content %}
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
+          Categories</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+          These categories sagment the leads</p>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <table class="table-auto w-full text-left whitespace-no-wrap">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                Name</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                Count</th>
+              <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-3">
+                Unassigned</td>
+              <td class="px-4 py-3">
+                {{unassigned_leads_count}}
+              </td>
+            </tr>
+            {% for category in category_list %}
+              <tr>
+                <td class="px-4 py-3">
+                  <a class="hover:text-pink-500" href="{% url 'leads:category-detail' category.id %}">
+                    {{category.name}}
+                  </a>
+                </td>
+                <td class="px-4 py-3">{{ category.lead_set.count }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+{% endblock content %}
