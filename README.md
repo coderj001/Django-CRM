@@ -1,5 +1,5 @@
 ## Django CRM (Customer Relationship Management)
-> django
+> django, django class base views, django test, tailwind css
 
 # Todos
 <!-- - [x] Intro<!-- 0:00    -->
@@ -46,7 +46,7 @@
 - [x] Leads Queryset<!-- 5:44:39 -->
 - [x] Invite Agents<!-- 5:58:59 -->
 - [x] Password Reset<!-- 6:07:15 -->
-- [ ] Unassigned Leads<!-- 6:25:37 -->
+- [x] Unassigned Leads<!-- 6:25:37 -->
 - [ ] Assign Agents<!-- 6:31:53 -->
 - [ ] Category Model<!-- 6:48:15 -->
 - [ ] Category List View<!-- 6:52:16 -->

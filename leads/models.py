@@ -54,6 +54,13 @@ class Lead(models.Model):
         on_delete=models.SET_NULL
     )
 
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
     class Meta:
         verbose_name = "Lead"
         verbose_name_plural = "Leads"
@@ -83,3 +90,15 @@ class Agent(models.Model):
 
     def get_absolute_url(self):
         return reverse("agents:agent-detail", kwargs={'pk': self.id})
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
