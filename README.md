@@ -52,7 +52,7 @@
 - [x] Category List View<!-- 6:52:16 -->
 - [x] Category Detail View<!-- 7:02:47 -->
 - [x] Category Update View<!-- 7:13:45 -->
-- [ ] Crispy Forms<!-- 7:21:26 -->
+- [x] Crispy Forms<!-- 7:21:26 -->
 - [ ] Styling<!-- 7:43:35 -->
 - [ ] Environment Variables<!-- 7:53:03 -->
 - [ ] Setting up Postgresql<!-- 8:02:48 -->

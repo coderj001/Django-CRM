@@ -7,19 +7,18 @@ from django.views.generic import (
     FormView,
     ListView,
     TemplateView,
-    UpdateView,
+    UpdateView
 )
 
-from agents.mixins import (
-    LoginRequiredMixin,
-    OrganisorLoginRequiredMixin
-)
+from agents.mixins import LoginRequiredMixin, OrganisorLoginRequiredMixin
 from leads.forms import (
+    AssignAgentForm,
     CustomUserCreationForm,
+    LeadCategoryUpdateForm,
     LeadForm,
-    AssignAgentForm
+    LeadModelForm
 )
-from leads.models import Lead, Category
+from leads.models import Category, Lead
 
 
 class SignUpView(CreateView):
@@ -78,9 +77,10 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
         return queryset
 
 
+# ERROR:  <25-05-21, coderj001> # django.db.utils.IntegrityError: NOT NULL constraint failed: leads_lead.organisation_id
 class LeadCreateView(OrganisorLoginRequiredMixin, CreateView):
     template_name = "leads/lead_create.html"
-    form_class = LeadForm
+    form_class = LeadModelForm
     success_url = reverse_lazy("leads:lead-list")
     login_url = reverse_lazy('login')
 
@@ -193,3 +193,21 @@ class CategoryDetailView(LoginRequiredMixin, DetailView):
             queryset = Category.objects.filter(
                 organisation=user.agent.organisation)
         return queryset
+
+
+class LeadCategoryUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "leads/lead_category_update.html"
+    form_class = LeadCategoryUpdateForm
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(
+                organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset
+
+    def get_success_url(self):
+        return reverse("leads:lead-detail", kwargs={"pk": self.get_object().id})

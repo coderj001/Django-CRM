@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tailwind_filters %}
 
 {% block TITLE %}
   Agent Update
@@ -25,8 +26,10 @@
           <div class="flex">
             <form action="." method="post" accept-charset="utf-8">
               {% csrf_token %}
-              {{ form.as_p }}
-              <input type="submit" value="submit"/>
+        {{ form | crispy}}
+              <input
+                        class="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded"
+              type="submit" value="submit"/>
             </form>
           </div>
         </div>
