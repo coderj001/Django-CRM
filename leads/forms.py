@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 
-from leads.models import Lead, User, Agent
+from leads.models import Agent, Lead, User
 
 
 class LeadModelForm(forms.ModelForm):

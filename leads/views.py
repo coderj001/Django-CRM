@@ -77,7 +77,6 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
         return queryset
 
 
-# ERROR:  <25-05-21, coderj001> # django.db.utils.IntegrityError: NOT NULL constraint failed: leads_lead.organisation_id
 class LeadCreateView(OrganisorLoginRequiredMixin, CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForm
@@ -85,6 +84,9 @@ class LeadCreateView(OrganisorLoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
 
     def form_valid(self, form):
+        lead = form.save(commit=False)
+        lead.organisation = self.request.user.userprofile
+        lead.save()
         send_mail(
             subject="A lead has been created",
             message="Go to the site to see new lead",
@@ -96,7 +98,7 @@ class LeadCreateView(OrganisorLoginRequiredMixin, CreateView):
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "leads/lead_update.html"
-    form_class = LeadForm
+    form_class = LeadModelForm
     success_url = reverse_lazy("leads:lead-list")
     login_url = reverse_lazy('login')
 
