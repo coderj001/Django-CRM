@@ -37,14 +37,6 @@ class Lead(models.Model):
         null=True
     )
     age = models.IntegerField(default=0)
-    phoned = models.BooleanField(default=False)
-    source = models.CharField(
-        max_length=50,
-        choices=SOURCE_CHOICES,
-        default="Youtube"
-    )
-    # profile_pic = models.ImageField(blank=True, null=True)
-    # special_files = models.FileField(blank=True, null=True)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey(
@@ -60,6 +52,11 @@ class Lead(models.Model):
         null=True,
         blank=True
     )
+
+    description = models.TextField(blank=True, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
 
     class Meta:
         verbose_name = "Lead"

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
 
+{% block TITLE %}
+  Login
+{% endblock TITLE %}
+
 {% block content %}
   <div class="container mx-auto">
     <form action="." method="post">
@@ -10,9 +14,10 @@
           class="flex ml-auto text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded"
           type="submit">
           Login</button>
-        <hr>
-        <a href="{% url 'password-reset' %}">
-          Forgot Password?</a>
       </form>
+      <div class="py-5 border-t border-gray-200 mt-5">
+        <a class="hover:text-blue-500" href="{% url 'password-reset' %}">
+          Forgot Password?</a>
+      </div>
     </div>
   {% endblock content %}

@@ -135,6 +135,7 @@ class AssignAgentView(OrganisorLoginRequiredMixin, FormView):
     success_url = reverse_lazy("leads:lead-list")
     login_url = reverse_lazy('login')
 
+    # TODO:  <04-06-21, coderj001> # understanding
     def get_form_kwargs(self):
         kwargs = super(AssignAgentView, self).get_form_kwargs()
         kwargs.update({"request": self.request})
