@@ -8,6 +8,7 @@ django = "*"
 pillow = "*"
 django-crispy-forms = "*"
 crispy-tailwind = "*"
+gunicorn = "*"
 
 [dev-packages]
 django-linter = "*"
