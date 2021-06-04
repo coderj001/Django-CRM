@@ -1,6 +1,10 @@
 ## Django CRM (Customer Relationship Management)
 > django, django class base views, django test, tailwind css
 
+### Preview
+![image](https://i.imgur.com/TTtExCP.png)
+![image](https://i.imgur.com/yVUvbhe.png)
+
 # Todos
 <!-- - [x] Intro<!-- 0:00    -->
 <!-- - [x] Prerequisites<!-- 3:14    -->
@@ -53,12 +57,12 @@
 - [x] Category Detail View<!-- 7:02:47 -->
 - [x] Category Update View<!-- 7:13:45 -->
 - [x] Crispy Forms<!-- 7:21:26 -->
-- [ ] Styling<!-- 7:43:35 -->
-- [ ] Environment Variables<!-- 7:53:03 -->
-- [ ] Setting up Postgresql<!-- 8:02:48 -->
-- [ ] Whitenoise<!-- 8:10:25 -->
-- [ ] Deploying on Digital Ocean<!-- 8:15:36 -->
-- [ ] Email Sending with Mailgun<!-- 8:33:12 -->
-- [ ] Using a Custom Domain<!-- 8:45:00 -->
-- [ ] Touchups and Fixes<!-- 8:47:54 -->
+- [x] Styling<!-- 7:43:35 -->
+- [x] Environment Variables<!-- 7:53:03 -->
+- [x] Setting up Postgresql<!-- 8:02:48 -->
+- [x] Whitenoise<!-- 8:10:25 -->
+- [x] Deploying on Digital Ocean<!-- 8:15:36 -->
+- [x] Email Sending with Mailgun<!-- 8:33:12 -->
+- [x] Using a Custom Domain<!-- 8:45:00 -->
+- [x] Touchups and Fixes<!-- 8:47:54 -->
 <!-- - [ ] Thank You<!-- 9:00:44 -->
