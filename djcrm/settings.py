@@ -31,15 +31,6 @@ INSTALLED_APPS = [
     'agents.apps.AgentsConfig'
 ]
 
-if DEBUG:
-    INSTALLED_APPS += [
-        'django_extensions',
-        'debug_toolbar',
-    ]
-else:
-    ALLOWED_HOSTS += [
-        os.environ.get('allowed_host'),
-    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,9 +40,42 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'django_extensions',
+        'debug_toolbar',
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.history.HistoryPanel',
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+        'debug_toolbar.panels.profiling.ProfilingPanel',
+    ]
+
+    INTERNAL_IPS = [
+        '127.0.0.1',
+        '0.0.0.0',
+        'localhost',
+    ]
+else:
+    ALLOWED_HOSTS += [
+        os.environ.get('allowed_host'),
+    ]
 
 ROOT_URLCONF = 'djcrm.urls'
 
@@ -112,28 +136,6 @@ STATIC_ROOT = "static_root"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.history.HistoryPanel',
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-    'debug_toolbar.panels.profiling.ProfilingPanel',
-]
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-    '0.0.0.0',
-    'localhost',
-]
 
 AUTH_USER_MODEL = 'leads.User'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
