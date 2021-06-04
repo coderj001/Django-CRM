@@ -10,6 +10,10 @@ SECRET_KEY = os.environ.get('secret_key')
 
 DEBUG = bool(strtobool(os.environ.get('debug')))
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,10 +32,6 @@ INSTALLED_APPS = [
 ]
 
 if DEBUG:
-    ALLOWED_HOSTS = [
-        'localhost',
-        '127.0.0.1',
-    ]
     INSTALLED_APPS += [
         'django_extensions',
         'debug_toolbar',
