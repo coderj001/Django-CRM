@@ -6,13 +6,6 @@
 ![image](https://i.imgur.com/yVUvbhe.png)
 
 # Todos
-<!-- - [x] Intro<!-- 0:00    -->
-<!-- - [x] Prerequisites<!-- 3:14    -->
-<!-- - [x] Django Versions<!-- 4:45    -->
-<!-- - [x] Following Along<!-- 8:24    -->
-<!-- - [x] VSCode Setup<!-- 9:21    -->
-<!-- - [x] VSCode Extensions<!-- 19:41   -->
-<!-- - [x] Introduction to Django<!-- 21:21   -->
 - [x] Starting a Project<!-- 26:37   -->
 - [x] Server and Migrations<!-- 33:14   -->
 - [x] Project Structure<!-- 38:04   -->
@@ -58,11 +51,3 @@
 - [x] Category Update View<!-- 7:13:45 -->
 - [x] Crispy Forms<!-- 7:21:26 -->
 - [x] Styling<!-- 7:43:35 -->
-<!-- - [x] Environment Variables<!-- 7:53:03 --> -->
-<!-- - [x] Setting up Postgresql<!-- 8:02:48 --> -->
-<!-- - [x] Whitenoise<!-- 8:10:25 --> -->
-<!-- - [x] Deploying on Digital Ocean<!-- 8:15:36 --> -->
-<!-- - [x] Email Sending with Mailgun<!-- 8:33:12 --> -->
-<!-- - [x] Using a Custom Domain<!-- 8:45:00 --> -->
-<!-- - [x] Touchups and Fixes<!-- 8:47:54 --> -->
-<!-- - [ ] Thank You<!-- 9:00:44 -->
